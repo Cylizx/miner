@@ -1,0 +1,6 @@
+[submodule "pow"]
+	path = pow
+	url = git@github.com:Cylizx/pow.git
+[submodule "network"]
+	path = network
+	url = git@github.com:Cylizx/network

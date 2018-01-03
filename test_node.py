@@ -21,12 +21,10 @@ def get_addr_value(addr):
     m.load_latest_block()
     return m.get_addr_value(addr)
 
-def send_transaction(src_addr,dst_addr,value,key):
-    tr={};
-    tr['src_addr']=src_addr
-    tr['dst_addr']=dst_addr
-    tr['value']=10
-    tr['timestamp']=time.time()
+def send_transaction(dst_addr,value,key):
+    m = Fullnode()
+    m.load_key(key)
+    tr = m.create_transaction(dst_addr,value)
     time.sleep(1)
     network.broadcast_message(TxMessage(tr))
 
@@ -40,7 +38,7 @@ if __name__ == '__main__' :
         print(p+': '+str(get_addr_value(wallet[p])))
 
     for p in ['A','B','D','E','F']:
-        send_transaction(wallet['C'],wallet[p],10,'')
+        send_transaction(wallet[p],10,'C.json')
     print(get_next_header())
 
     for p in ['A','B','C','D','E','F']:
